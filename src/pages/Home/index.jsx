@@ -1,50 +1,49 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'wouter';
-import ListOfGifs from '../../components/ListOfGifs';
-import useGifs from '../../hooks/useGifs';
-import '../../App.css';
+import { useLocation } from 'wouter';
+import { useGifs } from '../../hooks/useGifs';
+import ListOfGifs from '../../components/ListOfGifs/';
+import Category from '../../components/Category';
 
-const POPULAR_GIFS = ['Venezuela', 'Pandas', 'Morty', 'Rick'];
+const POPULAR_GIFS = ['Matrix', 'Venezuela', 'Pandas', 'Morty', 'Rick'];
 
-function Home() {
+export default function Home() {
   const [keyword, setKeyword] = useState('');
   const [path, pushLocation] = useLocation();
-
   const { loading, gifs } = useGifs();
+
+  console.log(path, loading);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // Navigate to other route
+    // navigate to other route
     pushLocation(`/search/${keyword}`);
   };
 
   const handleChange = (evt) => {
     setKeyword(evt.target.value);
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <button>Search</button>
         <input
-          placeholder="Search a gif"
+          placeholder="Search a gif here..."
           onChange={handleChange}
           type="text"
           value={keyword}
         />
       </form>
-      <h3 className="App-title">Last Search</h3>
-      <ListOfGifs gifs={gifs} />
-      <h3 className="App-title">Trending Gifs</h3>
-      <ul>
-        {POPULAR_GIFS.map((pg) => {
-          return (
-            <li key={pg}>
-              <Link to={`/search/${pg}`}>{pg} Gifs</Link>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="App-main">
+        <div className="App-results">
+          <h3 className="App-title">Last Search</h3>
+          <ListOfGifs gifs={gifs} />
+        </div>
+        <div className="App-category">
+          <Category name="Trending Gifs" options={POPULAR_GIFS} />
+          <Category name="Pets" options={['Perros', 'Gatos', 'Hamster']} />
+        </div>
+      </div>
     </>
   );
 }
-
-export default Home;
