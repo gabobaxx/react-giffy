@@ -3,6 +3,7 @@ import { useLocation } from 'wouter';
 import { useGifs } from '../../hooks/useGifs';
 import ListOfGifs from '../../components/ListOfGifs/';
 import Category from '../../components/Category';
+import TrendingSearches from '../../components/TrendingSearches';
 
 const POPULAR_GIFS = ['Matrix', 'Venezuela', 'Pandas', 'Morty', 'Rick'];
 
@@ -40,7 +41,8 @@ export default function Home() {
           <ListOfGifs gifs={gifs} />
         </div>
         <div className="App-category">
-          <Category name="Trending Gifs" options={POPULAR_GIFS} />
+          <TrendingSearches />
+          <Category name="Random" options={POPULAR_GIFS} />
           <Category name="Pets" options={['Perros', 'Gatos', 'Hamster']} />
         </div>
       </div>
