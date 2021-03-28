@@ -8,7 +8,7 @@ import Detail from './pages/Detail';
 import { Link, Route } from 'wouter';
 // Contexts
 import StaticContext from './context/StaticContext';
-import { GifsContextProvider } from './context/GifsContextProvider';
+import { GifsContextProvider } from './context/GifsContext';
 
 function App() {
   return (

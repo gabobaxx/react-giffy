@@ -5,10 +5,12 @@ import './Gif.css';
 const Gif = (props) => {
   const { title, id, url } = props;
   return (
-    <Link to={`/gif/${id}`} className="Gif-link">
-      <h4>{title}</h4>
-      <img src={url} alt={title} />
-    </Link>
+    <div className="Gif">
+      <Link to={`/gif/${id}`} className="Gif-link">
+        <h4>{title}</h4>
+        <img loading="lazy" src={url} alt={title} />
+      </Link>
+    </div>
   );
 };
 
