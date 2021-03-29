@@ -1,51 +1,30 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
+// Hooks
 import { useLocation } from 'wouter';
-import { useGifs } from '../../hooks/useGifs';
-import ListOfGifs from '../../components/ListOfGifs/';
-import Category from '../../components/Category';
-import TrendingSearches from '../../components/TrendingSearches';
-
-const POPULAR_GIFS = ['Matrix', 'Venezuela', 'Pandas', 'Morty', 'Rick'];
+// Components
+import ListOfCategories from 'components/ListOfCategories';
+import ListOfResults from 'components/ListOfResults';
+import SearchForm from 'components/SearchForm';
 
 export default function Home() {
-  const [keyword, setKeyword] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [path, pushLocation] = useLocation();
-  const { loading, gifs } = useGifs();
 
-  console.log(path, loading);
-
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    // navigate to other route
-    pushLocation(`/search/${keyword}`);
-  };
-
-  const handleChange = (evt) => {
-    setKeyword(evt.target.value);
-  };
+  // Navigate to other route.
+  const handleSubmit = useCallback(
+    ({ keyword }) => {
+      pushLocation(`/search/${keyword}`);
+    },
+    [pushLocation]
+  );
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <button>Search</button>
-        <input
-          placeholder="Search a gif here..."
-          onChange={handleChange}
-          type="text"
-          value={keyword}
-        />
-      </form>
-      <div className="App-main">
-        <div className="App-results">
-          <h3 className="App-title">Last Search</h3>
-          <ListOfGifs gifs={gifs} />
-        </div>
-        <div className="App-category">
-          <TrendingSearches />
-          <Category name="Random" options={POPULAR_GIFS} />
-          <Category name="Pets" options={['Perros', 'Gatos', 'Hamster']} />
-        </div>
-      </div>
+      <SearchForm onSubmit={handleSubmit} />
+      <main className="App-main">
+        <ListOfResults />
+        <ListOfCategories />
+      </main>
     </>
   );
 }
