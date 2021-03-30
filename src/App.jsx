@@ -9,6 +9,9 @@ import SearchResults from './pages/SearchResults';
 import Detail from './pages/Detail';
 // Contexts
 import Pepito from './context/StaticContext';
+
+// import StaticContext from './context/StaticContext';
+
 import { GifsContextProvider } from './context/GifsContext';
 
 const ligadura = () => 'hello world';

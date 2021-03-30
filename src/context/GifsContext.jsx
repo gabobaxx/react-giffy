@@ -1,6 +1,10 @@
 import React, {useState} from 'react'
 
+
 const Context = React.createContext({})
+
+// export const Context = React.createContext({});
+
 
 export function GifsContextProvider ({children}) {
   const [gifs, setGifs] = useState([])
@@ -10,4 +14,6 @@ export function GifsContextProvider ({children}) {
   </Context.Provider>
 }
 
+
 export default Context
+
