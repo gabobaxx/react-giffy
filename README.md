@@ -1,6 +1,16 @@
-# Getting Started with Create React App
+# Giffy App :rocket:
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+> This project was build watching tutorials of [midudev](https://midu.tube)
+
+## Technologies used for this project :computer:
+
+-   [react](https://reactjs.org/)
+
+## Screenshots :camera:
+
+![principal](docs/principal.png)
 
 ## Available Scripts
 

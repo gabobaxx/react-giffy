@@ -1,10 +1,15 @@
 import React from 'react';
+
 import Gif from 'components/Gif';
 import Spinner from 'components/Spinner';
 import { Helmet } from 'react-helmet';
 import { useSingleGif } from 'hooks/useSingleGif';
 import { Redirect } from 'wouter';
 import { useSEO } from 'hooks/useSEO';
+
+// import Gif from '../../components/Gif';
+// import {useGlobalGifs} from '../../hooks/useGlobalGifs';
+
 
 export default function Detail({ params }) {
   const { gif, isLoading, isError } = useSingleGif({ id: params.id });

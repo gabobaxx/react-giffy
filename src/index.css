@@ -1,5 +1,27 @@
+
 html {
   box-sizing: border-box;
+
+/* :root {
+  --fz: 16px;
+  --theme--contrast-0: #121212;
+  --theme-body-bg: #18061f;
+  --theme-body-txt: #f3f3f3;
+  --search-size-mx-h: 3rem;
+  --zIndex-header: 20;
+  --zIndex-component: 5;
+  --brand-color_1: #00ff99;
+  --brand-color_2: #00ccff;
+  --brand-color_3: #9933ff;
+  --brand-color_4: tomato;
+  --brand-color_5: #fff35c;
+  --brand-color_6: #8429de;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 1rem; */
+
 }
 
 *,
@@ -13,12 +35,16 @@ body {
   font-family: 'Manrope', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: var(--fz);
+  background-color: var(--theme-body-bg);
+  color: var(--theme-body-txt);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 
 button {
   background: #09f;
@@ -28,6 +54,7 @@ button {
   font-size: 16px;
   border-radius: 10px 0 0 10px;
 }
+
 
 a {
   color: #09f;
@@ -41,6 +68,7 @@ ul {
   padding: 0;
 }
 
+
 form {
   display: flex;
   margin: 0 auto 30px;
@@ -53,3 +81,13 @@ input[type=text] {
   border: none;
   padding: 4px 16px;
 }
+
+/* -------------------- rf-layout  - Component / header */
+/* .o-header {
+  background-color: inherit;
+  position: sticky;
+  top: 0;
+  z-index: var(--zIndex-header);
+  max-height: var(--search-size-mx-h);
+} */
+
