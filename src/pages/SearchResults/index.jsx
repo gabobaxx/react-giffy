@@ -21,6 +21,7 @@ export default function SearchResults({ params }) {
 
   useSEO({ title, description: 'Gif Searcher' });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceHandleNextPage = useCallback(
     debounce(() => setPage((prevPage) => prevPage + 1), 200),
     [setPage]
