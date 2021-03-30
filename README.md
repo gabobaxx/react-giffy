@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-> This project was build siguiendo tutoriales de [midudev](https://midu.tube)
+> This project was build watching tutorials of [midudev](https://midu.tube)
 
 ## Technologies used for this project :computer:
 
