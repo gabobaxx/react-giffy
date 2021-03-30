@@ -28,11 +28,13 @@ export default function App() {
             <Route component={Home} path="/" />
             <Route component={SearchResults} path="/search/:keyword" />
             <Route component={Detail} path="/gif/:id" />
+            <Route
+              component={() => <h1>404 Error Page Not Found</h1>}
+              path="/404"
+            />
           </GifsContextProvider>
         </section>
       </div>
     </Pepito.Provider>
   );
 }
-
-// hola como estas mariana 0

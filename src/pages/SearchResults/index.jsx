@@ -6,16 +6,20 @@ import ListOfGifs from 'components/ListOfGifs';
 // Hooks
 import { useGifs } from 'hooks/useGifs';
 import { useNearScreen } from 'hooks/useNearScreen';
+import { useSEO } from 'hooks/useSEO';
 
 export default function SearchResults({ params }) {
   const { keyword } = params;
-  const { loading, gifs, setPage } = useGifs({ keyword });
   const externalRef = useRef();
+  const { loading, gifs, setPage } = useGifs({ keyword });
+  const title = gifs ? `${gifs.length} results of ${keyword}` : '';
 
   const { isNearScreen } = useNearScreen({
     externalRef: loading ? null : externalRef,
     once: false,
   });
+
+  useSEO({ title, description: 'Gif Searcher' });
 
   const debounceHandleNextPage = useCallback(
     debounce(() => setPage((prevPage) => prevPage + 1), 200),
