@@ -5,7 +5,7 @@ import GifsContext from '../context/GifsContext';
 // import { getGifs } from '../services/getGifs';
 // import { Context } from '../context/GifsContext';
 
-const GifContext = Context;
+// const GifContext = Context;
 
 
 const INITIAL_PAGES = 0;
