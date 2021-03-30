@@ -1,50 +1,30 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'wouter';
-import ListOfGifs from '../../components/ListOfGifs';
-import useGifs from '../../hooks/useGifs';
-import '../../App.css';
+import React, { useCallback } from 'react';
+// Hooks
+import { useLocation } from 'wouter';
+// Components
+import ListOfCategories from 'components/ListOfCategories';
+import ListOfResults from 'components/ListOfResults';
+import SearchForm from 'components/SearchForm';
 
-const POPULAR_GIFS = ['Venezuela', 'Pandas', 'Morty', 'Rick'];
-
-function Home() {
-  const [keyword, setKeyword] = useState('');
+export default function Home() {
+  // eslint-disable-next-line no-unused-vars
   const [path, pushLocation] = useLocation();
 
-  const { loading, gifs } = useGifs();
+  // Navigate to other route.
+  const handleSubmit = useCallback(
+    ({ keyword }) => {
+      pushLocation(`/search/${keyword}`);
+    },
+    [pushLocation]
+  );
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    // Navigate to other route
-    pushLocation(`/search/${keyword}`);
-  };
-
-  const handleChange = (evt) => {
-    setKeyword(evt.target.value);
-  };
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Search a gif"
-          onChange={handleChange}
-          type="text"
-          value={keyword}
-        />
-      </form>
-      <h3 className="App-title">Last Search</h3>
-      <ListOfGifs gifs={gifs} />
-      <h3 className="App-title">Trending Gifs</h3>
-      <ul>
-        {POPULAR_GIFS.map((pg) => {
-          return (
-            <li key={pg}>
-              <Link to={`/search/${pg}`}>{pg} Gifs</Link>
-            </li>
-          );
-        })}
-      </ul>
+      <SearchForm onSubmit={handleSubmit} />
+      <main className="App-main">
+        <ListOfResults />
+        <ListOfCategories />
+      </main>
     </>
   );
 }
-
-export default Home;

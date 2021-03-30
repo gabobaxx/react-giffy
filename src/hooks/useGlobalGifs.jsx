@@ -3,6 +3,4 @@ import { Context } from '../context/GifsContext';
 
 const GifsContext = Context;
 
-export const useGlobalGifs = () => {
-  return useContext(GifsContext).gifs;
-};
+export const useGlobalGifs = () => useContext(GifsContext).gifs;

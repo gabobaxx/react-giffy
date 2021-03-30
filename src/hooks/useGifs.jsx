@@ -1,34 +1,46 @@
 import { useContext, useEffect, useState } from 'react';
-import { getGifs } from '../services/getGifs';
-import { Context } from '../context/GifsContext';
+
+import getGifs from '../services/getGifs';
+import GifsContext from '../context/GifsContext';
+// import { getGifs } from '../services/getGifs';
+// import { Context } from '../context/GifsContext';
 
 const GifContext = Context;
 
-function useGifs({ keyword } = { keyword: null }) {
+
+const INITIAL_PAGES = 0;
+
+export const useGifs = ({ keyword } = { keyword: null }) => {
   const [loading, setLoading] = useState(false);
-  const { gifs, setGifs } = useContext(GifContext);
-  //   const [gifs, setGifs] = useState([]);
+  const [loadingNextPage, setLoadingNextPage] = useState();
+  const [page, setPage] = useState(INITIAL_PAGES);
+  const { gifs, setGifs } = useContext(GifsContext);
+  // recuperamos la keyword del localStorage
+  const keywordToUse =
+    keyword || localStorage.getItem('lastKeyword') || 'random';
+  useEffect(
+    function () {
+      setLoading(true);
 
+      getGifs({ keyword: keywordToUse }).then((gifs) => {
+        setGifs(gifs);
+        setLoading(false);
+        // guardamos la keyword en el localStorage
+        localStorage.setItem('lastKeyword', keyword);
+      });
+    },
+    [keyword, keywordToUse, setGifs]
+  );
   useEffect(() => {
-    setLoading(true);
-    const keywordToUsed =
-      keyword || localStorage.getItem('lastKeyword') || 'random';
+    if (page === INITIAL_PAGES) return;
 
-    getGifs({ keyword: keywordToUsed }).then((gifs) => {
-      setGifs(gifs);
-      setLoading(false);
-      localStorage.setItem('lastKeyword', keyword);
+    setLoadingNextPage(true);
+
+    getGifs({ keyword: keywordToUse, page }).then((nextGifs) => {
+      setGifs((prevGifs) => prevGifs.concat(nextGifs));
+      setLoadingNextPage(false);
     });
-  }, [
-    // dependencia del useEffect.
-    // el efecto solo se renderiza cuando cambia sus dependencias
-    // ejemplo -> si hay un array vacio quiere decir que no hay ninguna dependencia y el efecto solo se renderiza una vez (al principio)
-    // en este ejemplo la dependencia seria la variable keyword
-    // es decir que cuando cambie en algun momento de la app la keyword, el efecto se tendria que renderizar otra vez.
-    keyword,
-  ]);
+  }, [keywordToUse, page, setGifs]);
 
-  return { loading, gifs };
-}
-
-export default useGifs;
+  return { loading, loadingNextPage, gifs, setPage };
+};
